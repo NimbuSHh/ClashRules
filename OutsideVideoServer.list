@@ -1,9 +1,10 @@
 # 内容：花云Emby服+Misakaf+HDO+mudvod+终点站
-# 数量：7条
+# 数量：8条
 DOMAIN-SUFFIX,emby.flowercloud.yt
 DOMAIN-SUFFIX,embyaz.misakaf.xyz
 DOMAIN-SUFFIX,streamoon.online
 DOMAIN-SUFFIX,mudvod.tv
+DOMAIN-SUFFIX,nivod.tv
 DOMAIN-SUFFIX,newpppp.com
 DOMAIN-SUFFIX,biggggg.com
 DOMAIN-SUFFIX,emby.wtf
