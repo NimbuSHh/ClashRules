@@ -11,3 +11,7 @@ dns:
     - system
     - 119.28.28.28
     - 114.114.114.114
+  fallback: #!replace
+    - tls://8.8.8.8:853
+    - tls://1.0.0.1:853
+    - https://1.1.1.1/dns-query
