@@ -16,16 +16,11 @@ log-level: info
 ipv6: false
 
 external-controller: 0.0.0.0:9090
-clash-for-android:
-  append-system-dns: false
-profile:
-  tracing: true
-experimental:
-  sniff-tls-sni: true
+secret: '123456'
 
 dns:
   enable: true
-  listen: 127.0.0.1:8853
+  listen: 0.0.0.0:53
   ipv6: false
   
   # 将会完整覆盖原有 default-nameserver
