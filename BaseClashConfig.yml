@@ -11,23 +11,59 @@ socks-port: 7891
 redir-port: 7892
 
 dns:
-  enable: true # 是否启用dns false
-  ipv6: false
-  default-nameserver:
-  - 223.5.5.5
-  - 114.114.114.114
-  - 182.254.116.116
-  - 119.28.28.28
-  - tls://1.0.0.1
-  - tls://8.8.4.4
-  nameserver:
-  - 223.5.5.5
-  - 114.114.114.114
-  - 182.254.116.116
-  - 119.28.28.28
+  # 将会完整覆盖原有 default-nameserver
+  default-nameserver: #!replace
+    - 119.28.28.28
+    - 114.114.114.114
+  # 将会完整覆盖原有 nameserver
+  nameserver: #!replace
+    - 119.28.28.28
+    - 114.114.114.114
   fallback:
-  - tls://1.0.0.1
-  - tls://8.8.4.4
+    - https://1.1.1.1/dns-query
+    - tls://1.0.0.1:853
+    - tls://8.8.4.4:853
+  fallback-filter: #!replace
+    geoip: true
+    geoip-code: CN
+    ipcidr:
+      - 240.0.0.0/4
+      - 0.0.0.0/32
+      - 127.0.0.1/32
+    domain:
+      - "+.facebook.com"
+      - "+.twitter.com"
+      - "+.google.com"
+      - "+.googleapis.com"
+      - "+.google.cn"
+      - "+.googleapis.cn"
+      - "+.xn--ngstr-lra8j.com"
+      - "+.googlevideo.com"
+      - "+.gvt1.com"
+      - "+.gmail.com"
+      - "+.youtube.com"
+      - "+.youtu.be"
+      - "+.gvt0.com"
+      - "+.gvt2.com"
+      - "+.gvt3.com"
+      - "+.gstatic.com"
+      - "+.265.com"
+      - "+.2mdn.net"
+      - "+.app-measurement.com"
+      - "+.c.admob.com"
+      - "+.clickserve.dartsearch.net"
+      - "+.crl.pki.goog"
+      - "+.doubleclick.net"
+      - "+.firebase-settings.crashlytics.com"
+      - "+.google-analytics.com"
+      - "+.googleadservices.com"
+      - "+.googleanalytics.com"
+      - "+.googleoptimize.com"
+      - "+.googlesyndication.com"
+      - "+.googletagmanager.com"
+      - "+.googletagservices.com"
+      - "+.msftconnecttest.com"
+      - "+.msftncsi.com"
 
 # 1. clash DNS 请求逻辑：
 #   (1) 当访问一个域名时， nameserver 与 fallback 列表内的所有服务器并发请求，得到域名对应的 IP 地址。
