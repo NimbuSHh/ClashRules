@@ -42,40 +42,7 @@ dns:
       - 240.0.0.0/4
       - 0.0.0.0/32
       - 127.0.0.1/32
-    domain:
-      - "+.facebook.com"
-      - "+.twitter.com"
-      - "+.google.com"
-      - "+.googleapis.com"
-      - "+.google.cn"
-      - "+.googleapis.cn"
-      - "+.xn--ngstr-lra8j.com"
-      - "+.googlevideo.com"
-      - "+.gvt1.com"
-      - "+.gmail.com"
-      - "+.youtube.com"
-      - "+.youtu.be"
-      - "+.gvt0.com"
-      - "+.gvt2.com"
-      - "+.gvt3.com"
-      - "+.gstatic.com"
-      - "+.265.com"
-      - "+.2mdn.net"
-      - "+.app-measurement.com"
-      - "+.c.admob.com"
-      - "+.clickserve.dartsearch.net"
-      - "+.crl.pki.goog"
-      - "+.doubleclick.net"
-      - "+.firebase-settings.crashlytics.com"
-      - "+.google-analytics.com"
-      - "+.googleadservices.com"
-      - "+.googleanalytics.com"
-      - "+.googleoptimize.com"
-      - "+.googlesyndication.com"
-      - "+.googletagmanager.com"
-      - "+.googletagservices.com"
-      - "+.msftconnecttest.com"
-      - "+.msftncsi.com"
+      
 
 # 1. clash DNS 请求逻辑：
 #   (1) 当访问一个域名时， nameserver 与 fallback 列表内的所有服务器并发请求，得到域名对应的 IP 地址。
