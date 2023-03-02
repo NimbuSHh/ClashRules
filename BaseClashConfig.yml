@@ -76,6 +76,7 @@ dns:
       - "+.googletagservices.com"
       - "+.msftconnecttest.com"
       - "+.msftncsi.com"
+      - "+.bing.com"
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
   fake-ip-filter:
