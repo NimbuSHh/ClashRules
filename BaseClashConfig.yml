@@ -88,6 +88,8 @@ dns:
     - "*.51ping.com"
     - "*.135editor.com"
     - "*.dper.com"
+    - "*.zoom.us"
+    - "*.zoom.com.cn"
     - "*.lan"
     - "*.localdomain"
     - "*.example"
