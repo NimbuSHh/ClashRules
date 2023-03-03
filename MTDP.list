@@ -1,5 +1,5 @@
 # 内容：workhostlist
-# 数量：10条
+# 数量：
 DOMAIN-SUFFIX,neixin.cn
 DOMAIN-SUFFIX,sankuai.com
 DOMAIN-SUFFIX,meituan.net
@@ -11,3 +11,4 @@ DOMAIN-SUFFIX,135editor.com
 DOMAIN-SUFFIX,dper.com
 DOMAIN-SUFFIX,zoom.us
 DOMAIN-SUFFIX,zoom.com.cn
+DOMAIN-SUFFIX,kaspersky-labs.com
