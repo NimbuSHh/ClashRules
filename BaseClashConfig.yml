@@ -35,7 +35,7 @@ dns:
     # - tls://1.0.0.1:853
     # - tls://8.8.4.4:853
   fallback-filter: #!replace
-    geoip: true
+    geoip: false
     geoip-code: CN
     ipcidr:
       - 240.0.0.0/4
