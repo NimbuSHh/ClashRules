@@ -34,6 +34,17 @@ dns:
   # fallback:
     # - tls://1.0.0.1:853
     # - tls://8.8.4.4:853
+  nameserver-policy:
+     '*.sankuai.com': 'dhcp://en0'
+     '+.sankuai.com': 'dhcp://en0'
+     '*.neixin.cn': 'dhcp://en0'
+     '*.meituan.com': 'dhcp://en0'
+     '*.meituan.net': 'dhcp://en0'
+     '*.dpfile.com': 'dhcp://en0'
+     '*.dianping.com': 'dhcp://en0'
+     '*.51ping.com': 'dhcp://en0'
+     '*.dper.com': 'dhcp://en0'
+     '*.135editor.com': 'dhcp://en0'
   fallback-filter: #!replace
     geoip: false
     geoip-code: CN
