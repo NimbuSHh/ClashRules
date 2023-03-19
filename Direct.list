@@ -1,6 +1,7 @@
 # 内容：直连
-# 数量：4条
+# 数量：5条
 DOMAIN-SUFFIX,qpic.cn
 DOMAIN-SUFFIX,qlogo.cn
 DOMAIN-SUFFIX,kooldns.cn
 DOMAIN-SUFFIX,ddnsto.com
+DOMAIN-SUFFIX,bluesea.ddns.me
