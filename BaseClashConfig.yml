@@ -47,6 +47,7 @@ dns:
      '*.51ping.com': 'dhcp://en0'
      '*.dper.com': 'dhcp://en0'
      '*.135editor.com': 'dhcp://en0'
+     '*.mt': 'dhcp://en0'
   fallback-filter: #!replace
     geoip: false
     geoip-code: CN
