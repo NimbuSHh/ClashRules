@@ -13,3 +13,4 @@ DOMAIN-SUFFIX,zoom.us
 DOMAIN-SUFFIX,zoom.com.cn
 DOMAIN-SUFFIX,kaspersky-labs.com
 DOMAIN-SUFFIX,nowcoder.com
+IP-CIDR,11.0.0.0/8,no-resolve
