@@ -10,6 +10,12 @@ socks-port: 7891
 # Linux 和 macOS 的 redir 代理端口 (如需使用此功能，请取消注释)
 redir-port: 7892
 
+#自定义 geodata url
+geox-url:
+  geoip: "https://cdn.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/geoip.dat"
+  geosite: "https://cdn.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/geosite.dat"
+  mmdb: "https://cdn.jsdelivr.net/gh/Loyalsoldier/geoip@release/Country.mmdb"
+
 allow-lan: false
 mode: rule
 log-level: info
@@ -18,8 +24,17 @@ ipv6: false
 external-controller: 0.0.0.0:9090
 secret: '123456'
 
+profile: 
+# 存储 select 选择记录
+  store-selected: true
+  # 持久化 fake-ip
+  store-fake-ip: true
+  
+
+
 dns:
   enable: true
+  prefer-h3: true # 开启 DoH 支持 HTTP/3，将并发尝试
   listen: 0.0.0.0:53
   ipv6: false
   
@@ -31,11 +46,18 @@ dns:
   nameserver: #!replace
     - tls://120.53.53.53:853
     - tls://223.6.6.6:853
-  fallback:
-    - tls://120.53.53.53:853
-    - tls://223.6.6.6:853
+  #fallback:
+   # - tls://120.53.53.53:853
+   # - tls://223.6.6.6:853
     # - tls://1.0.0.1:853
     # - tls://8.8.4.4:853
+  #fallback-filter: #!replace
+   # geoip: false
+    #geoip-code: CN
+    #ipcidr:
+     # - 240.0.0.0/4
+     # - 0.0.0.0/32
+     # - 127.0.0.1/32
   nameserver-policy:
      '*.sankuai.com': 'dhcp://en0'
      '+.sankuai.com': 'dhcp://en0'
@@ -48,13 +70,6 @@ dns:
      '*.dper.com': 'dhcp://en0'
      '*.135editor.com': 'dhcp://en0'
      '*.mt': 'dhcp://en0'
-  fallback-filter: #!replace
-    geoip: false
-    geoip-code: CN
-    ipcidr:
-      - 240.0.0.0/4
-      - 0.0.0.0/32
-      - 127.0.0.1/32
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
   fake-ip-filter:
