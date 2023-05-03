@@ -1,3 +1,4 @@
 # 内容：
 # 数量：
 IP-CIDR,10.1.1.0/24,no-resolve
+IP-CIDR,192.168.88.0/24,no-resolve
