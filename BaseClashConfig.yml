@@ -30,7 +30,10 @@ profile:
   # 持久化 fake-ip
   store-fake-ip: true
   
-
+tun:
+  enable: true
+  stack: gvisor
+  auto-detect-interface: true
 
 dns:
   enable: true
