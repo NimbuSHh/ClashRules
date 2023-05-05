@@ -33,6 +33,7 @@ profile:
 tun:
   enable: true
   stack: gvisor
+  auto-redir: true
   auto-detect-interface: true
 
 dns:
