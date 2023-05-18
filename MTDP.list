@@ -13,5 +13,6 @@ DOMAIN-SUFFIX,zoom.us
 DOMAIN-SUFFIX,zoom.com.cn
 DOMAIN-SUFFIX,kaspersky-labs.com
 DOMAIN-SUFFIX,nowcoder.com
+DOMAIN-SUFFIX,sankuai.info
 IP-CIDR,11.0.0.0/8,no-resolve
 IP-CIDR,10.0.0.0/8,no-resolve
