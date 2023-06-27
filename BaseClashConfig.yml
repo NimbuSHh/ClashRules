@@ -64,17 +64,7 @@ dns:
       #- 0.0.0.0/32
       #- 127.0.0.1/32
   nameserver-policy:
-     '*.sankuai.com': 'dhcp://en0'
-     '+.sankuai.com': 'dhcp://en0'
-     '*.neixin.cn': 'dhcp://en0'
-     '*.meituan.com': 'dhcp://en0'
-     '*.meituan.net': 'dhcp://en0'
-     '*.dpfile.com': 'dhcp://en0'
-     '*.dianping.com': 'dhcp://en0'
-     '*.51ping.com': 'dhcp://en0'
-     '*.dper.com': 'dhcp://en0'
-     '*.135editor.com': 'dhcp://en0'
-     '*.mt': 'dhcp://en0'
+    "+.sankuai.com,+.neixin.cn,+.meituan.com,+.meituan.net,+.dpfile.com,+.dianping.com,+.51ping.com,+.dper.com,+.135editor.com,+.mt": [11.11.11.11,11.11.11.12,tls://120.53.53.53:853,tls://223.6.6.6:853]
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
   fake-ip-filter:
