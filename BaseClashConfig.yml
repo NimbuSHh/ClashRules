@@ -33,6 +33,8 @@ profile:
 tun:
   enable: true
   stack: gvisor
+  dns-hijack:
+    - 'any:53'
   auto-redir: true
   auto-detect-interface: true
 
