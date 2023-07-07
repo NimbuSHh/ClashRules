@@ -29,6 +29,7 @@ profile:
   store-selected: true
   # 持久化 fake-ip
   store-fake-ip: true
+  tracing: true
   
 tun:
   enable: true
