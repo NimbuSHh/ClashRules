@@ -2,9 +2,6 @@
 # 数量：9条
 DOMAIN-SUFFIX,emby.flowercloud.yt
 
-DOMAIN-SUFFIX,embyaz.misakaf.xyz
-DOMAIN-SUFFIX,cf.misakaf.org
-
 DOMAIN-SUFFIX,adfuck.store
 DOMAIN-SUFFIX,streamoon.online
 DOMAIN-SUFFIX,mudvod.tv
@@ -36,3 +33,5 @@ DOMAIN-SUFFIX,bangumi.ca
 DOMAIN-SUFFIX,embyplus.org
 
 DOMAIN-SUFFIX,imetyou.top
+
+DOMAIN-SUFFIX,misakaf.org
