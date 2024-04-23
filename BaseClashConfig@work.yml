@@ -68,17 +68,17 @@ dns:
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
   fake-ip-filter:
-    - "*.neixin.cn"
-    - "*.sankuai.com"
-    - "*.meituan.com"
-    - "*.meituan.net"
-    - "*.dpfile.com"
-    - "*.dianping.com"
-    - "*.51ping.com"
-    - "*.135editor.com"
-    - "*.dper.com"
-    - "*.zoom.us"
-    - "*.zoom.com.cn"
+    - "+.neixin.cn"
+    - "+.sankuai.com"
+    - "+.meituan.com"
+    - "+.meituan.net"
+    - "+.dpfile.com"
+    - "+.dianping.com"
+    - "+.51ping.com"
+    - "+.135editor.com"
+    - "+.dper.com"
+    - "+.zoom.us"
+    - "+.zoom.com.cn"
     - "*.lan"
     - "*.localdomain"
     - "*.example"
@@ -183,9 +183,9 @@ dns:
     - "+.cmbchina.com"
     - "+.cmbimg.com"
     - googlevideo.com
-    - "*.myqnapcloud.cn"
-    - "*.sn.mynetname.net"
-    - "*.mycloudnas.com"
+    - "+.myqnapcloud.cn"
+    - "+.sn.mynetname.net"
+    - "+.mycloudnas.com"
 
 # 1. clash DNS 请求逻辑：
 #   (1) 当访问一个域名时， nameserver 与 fallback 列表内的所有服务器并发请求，得到域名对应的 IP 地址。
