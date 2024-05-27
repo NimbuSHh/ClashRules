@@ -32,7 +32,7 @@ profile:
   
 tun:
   enable: true
-  stack: mixed
+  stack: gvisor
   dns-hijack:
     - 'any:53'
   auto-redir: true
