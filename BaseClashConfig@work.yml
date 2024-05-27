@@ -29,7 +29,25 @@ profile:
   store-selected: true
   # 持久化 fake-ip
   store-fake-ip: true
-  
+
+sniffer:
+  enable: true
+  force-dns-mapping: true
+  parse-pure-ip: true
+  override-destination: false
+  sniff:
+    HTTP:
+      ports: [80, 8080-8880]
+      override-destination: true
+    TLS:
+      ports: [443, 8443]
+    QUIC:
+      ports: [443, 8443]
+  force-domain:
+    - +.v2ex.com
+  skip-domain:
+    - Mijia Cloud
+
 tun:
   enable: true
   stack: gvisor
