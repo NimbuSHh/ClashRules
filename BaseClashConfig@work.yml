@@ -64,12 +64,12 @@ dns:
   
   # 将会完整覆盖原有 default-nameserver
   default-nameserver: #!replace
-    - tls://120.53.53.53:853
-    - tls://223.6.6.6:853
+    - https://120.53.53.53/dns-query
+    - https://223.6.6.6/dns-query
   # 将会完整覆盖原有 nameserver
   nameserver: #!replace
-    - tls://120.53.53.53:853
-    - tls://223.6.6.6:853
+    - https://120.53.53.53/dns-query
+    - https://223.6.6.6/dns-query
   #fallback:
     #- tls://120.53.53.53:853
     #- tls://223.6.6.6:853
