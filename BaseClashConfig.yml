@@ -29,7 +29,6 @@ profile:
   store-selected: true
   # 持久化 fake-ip
   store-fake-ip: true
-  tracing: true
   
 tun:
   enable: true
@@ -37,6 +36,7 @@ tun:
   dns-hijack:
     - 'any:53'
   auto-redir: true
+  auto-route: true
   auto-detect-interface: true
 
 dns:
@@ -46,12 +46,12 @@ dns:
   
   # 将会完整覆盖原有 default-nameserver
   default-nameserver: #!replace
-    - tls://120.53.53.53:853
-    - tls://223.6.6.6:853
+    - https://120.53.53.53/dns-query
+    - https://223.6.6.6/dns-query
   # 将会完整覆盖原有 nameserver
   nameserver: #!replace
-    - tls://120.53.53.53:853
-    - tls://223.6.6.6:853
+    - https://120.53.53.53/dns-query
+    - https://223.6.6.6/dns-query
   #fallback:
     #- tls://120.53.53.53:853
     #- tls://223.6.6.6:853
