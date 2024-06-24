@@ -1,6 +1,7 @@
 # 内容：
 # 数量：
 IP-CIDR,10.1.1.0/24,no-resolve
-
+IP-CIDR,10.1.2.0/24,no-resolve
+IP-CIDR,10.1.0.0/24,no-resolve
 
 DOMAIN-SUFFIX,lan
