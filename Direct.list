@@ -9,3 +9,8 @@ DOMAIN-SUFFIX,nxtlnodes.com
 
 DOMAIN-SUFFIX,emby.misakaf.xyz
 DOMAIN-SUFFIX,hk.misakaf.org
+
+DOMAIN-SUFFIX,dnsany.com
+DOMAIN-SUFFIX,mobaibox.com
+DOMAIN-SUFFIX,yangshipin.cn
+IP-CIDR,183.206.0.0/15,no-resolve
