@@ -98,15 +98,17 @@ dns:
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
   fake-ip-filter:
-    - "+.neixin.cn"
     - "+.sankuai.com"
+    - "+.sankuai.info"
+    - "+.neixin.cn"
     - "+.meituan.com"
     - "+.meituan.net"
     - "+.dpfile.com"
     - "+.dianping.com"
     - "+.51ping.com"
-    - "+.135editor.com"
     - "+.dper.com"
+    - "+.135editor.com"
+    - "+.mt"
     - "+.zoom.us"
     - "+.zoom.com.cn"
     - "*.lan"
