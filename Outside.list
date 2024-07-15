@@ -44,6 +44,7 @@ DOMAIN-SUFFIX,misty.cx
 DOMAIN-SUFFIX,reddust.link
 DOMAIN-SUFFIX,happyav.eu.org
 DOMAIN-SUFFIX,tanhuatv.site
+IP-CIDR,152.53.67.239,no-resolve
 
 DOMAIN-SUFFIX,livednow.com
 DOMAIN-SUFFIX,orz-7.com
