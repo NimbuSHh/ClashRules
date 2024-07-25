@@ -4,3 +4,4 @@ desc: dns   nameserver-policy
 dns:
   # 将会完整覆盖原有 nameserver-policy
   nameserver-policy: #!replace
+hosts: #!replace
