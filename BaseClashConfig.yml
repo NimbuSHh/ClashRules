@@ -30,6 +30,7 @@ allow-lan: false
 mode: rule
 log-level: info
 ipv6: false
+enable_cache: false
 
 external-controller: 0.0.0.0:9090
 secret: '123456'
