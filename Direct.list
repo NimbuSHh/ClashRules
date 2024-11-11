@@ -29,3 +29,6 @@ IP-CIDR,183.238.66.0/24,no-resolve
 DOMAIN-SUFFIX,get.sogou.com
 
 DOMAIN-SUFFIX,ottdns.com
+
+DOMAIN-SUFFIX,makima.online
+DOMAIN-SUFFIX,cdn.jiashule.com
