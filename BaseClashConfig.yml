@@ -67,7 +67,7 @@ tun:
   auto-route: true
   auto-detect-interface: true
 
-use-hosts: true
+use-hosts: false
 hosts:
 #  cache.ott.ystenlive.itv.cmvideo.cn: pixman.io.ystenlive.dnsany.com
 #  cache.ott.bestlive.itv.cmvideo.cn: pixman.io.bestlive.dnsany.com
