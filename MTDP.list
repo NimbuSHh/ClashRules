@@ -16,5 +16,6 @@ DOMAIN-SUFFIX,kaspersky.com
 DOMAIN-SUFFIX,nowcoder.com
 DOMAIN-SUFFIX,sankuai.info
 DOMAIN-SUFFIX,mt
+DOMAIN-SUFFIX,keetapp.com
 IP-CIDR,11.0.0.0/8,no-resolve
 IP-CIDR,10.0.0.0/8,no-resolve
