@@ -1,5 +1,9 @@
 # 内容：
 # 数量：
+DOMAIN-SUFFIX,nimbus.mycloudnas.com
+DOMAIN-SUFFIX,hpx.mycloudnas.com
+DOMAIN-SUFFIX,hea08nqgexw.sn.mynetname.net
+
 IP-CIDR,10.1.2.0/24,no-resolve
 IP-CIDR,10.1.0.0/24,no-resolve
 IP-CIDR,100.100.1.0/24,no-resolve
