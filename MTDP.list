@@ -18,6 +18,7 @@ DOMAIN-SUFFIX,sankuai.info
 DOMAIN-SUFFIX,mt
 DOMAIN-SUFFIX,keetapp.com
 DOMAIN-SUFFIX,mynocode.host
+DOMAIN-SUFFIX,mysmartadvisor.com
 IP-CIDR,11.0.0.0/8,no-resolve
 IP-CIDR,10.0.0.0/8,no-resolve
 
