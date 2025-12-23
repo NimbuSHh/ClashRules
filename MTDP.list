@@ -21,6 +21,7 @@ DOMAIN-SUFFIX,mynocode.host
 DOMAIN-SUFFIX,mysmartadvisor.com
 IP-CIDR,11.0.0.0/8,no-resolve
 IP-CIDR,10.0.0.0/8,no-resolve
+IP-CIDR,33.0.0.0/8,no-resolve
 
 IP-CIDR,202.90.96.0/20,no-resolve
 
