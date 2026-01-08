@@ -102,7 +102,20 @@ dns:
       #- 0.0.0.0/32
       #- 127.0.0.1/32
   nameserver-policy:
-    "+neixin.cn,+sankuai.com,+meituan.net,+meituan.com,+dpfile.com,+dianping.com,+51ping.com,+135editor.com,+dper.com,+nowcoder.com,+sankuai.info,+mt,+keetapp.com,+mynocode.host": [11.11.11.11, 11.11.11.12, system, 120.53.53.53, 223.6.6.6]
+    '+.neixin.cn': &internal_dns [11.11.11.11, 11.11.11.12, system, 120.53.53.53, 223.6.6.6]
+    '+.sankuai.com': *internal_dns
+    '+.meituan.net': *internal_dns
+    '+.meituan.com': *internal_dns
+    '+.dpfile.com': *internal_dns
+    '+.dianping.com': *internal_dns
+    '+.51ping.com': *internal_dns
+    '+.135editor.com': *internal_dns
+    '+.dper.com': *internal_dns
+    '+.nowcoder.com': *internal_dns
+    '+.sankuai.info': *internal_dns
+    '+.mt': *internal_dns
+    '+.keetapp.com': *internal_dns
+    '+.mynocode.host': *internal_dns  
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
   fake-ip-filter:
