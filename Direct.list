@@ -40,10 +40,11 @@ DOMAIN-SUFFIX,amyconvert.com
 DOMAIN-SUFFIX,xmancdn.net
 DOMAIN-SUFFIX,6windplus.com
 DOMAIN-SUFFIX,api-flowercloud.com
+
 IP-CIDR,161.129.35.81/32,no-resolve
 IP-CIDR,161.129.35.177/32,no-resolve
 IP-CIDR,23.249.18.3/32,no-resolve
 IP-CIDR,23.249.19.94/32,no-resolve
 IP-CIDR,23.249.19.229/32,no-resolve
 IP-CIDR,198.176.49.123/32,no-resolve
-
+IP-CIDR,8.129.21.18/32,no-resolve
