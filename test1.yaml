@@ -17,6 +17,7 @@ dns:
     respect-rules: false
 proxies:
     - {name: "🇺🇸 RackNerd-洛杉矶-02", server: 107.174.183.52, port: 56433, type: vless, tls: true, packet-encoding: xudp, uuid: 5c2072f0-95f0-4345-a1a1-aea848000f44, servername: apple.com, flow: xtls-rprx-vision, reality-opts: {public-key: NfB0zbpssiyDdvFGQIyhcVuRqmn-Yqfdxys80oFcKnw}, client-fingerprint: chrome, skip-cert-verify: true, udp: true, tfo: false}
+    - { name: '🇺🇸 USA 5', type: vless, server: 2ff0d8632ae726df.cdn.jiashule.com, port: 40226, uuid: 8fc4e4fc-9fb1-4f5a-9207-0c80976f05a6, udp: true, tls: true, skip-cert-verify: false, flow: xtls-rprx-vision, client-fingerprint: qq, servername: d1--ov-gotcha07.bilivideo.com, reality-opts: { public-key: WhpHnybj_UxP1ehKd_utEGtnV4Sb6kyk2S1v0ZGCtFE, short-id: f009681d } }
 proxy-groups:
     - { name: '♻️ Auto', type: url-test, proxies: ['🇺🇸 RackNerd-洛杉矶-02'], url: 'http://connectivitycheck.gstatic.com/generate_204', interval: 600, timeout: 1500, tolerance: 50 }
     - { name: Final, type: select, proxies: [DIRECT, '🇺🇸 RackNerd-洛杉矶-02'] }
