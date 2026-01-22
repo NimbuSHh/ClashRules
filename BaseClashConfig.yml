@@ -97,7 +97,7 @@ dns:
       #- 0.0.0.0/32
       #- 127.0.0.1/32
   nameserver-policy:
-    '+.neixin.cn': &internal_dns [11.11.11.11, 11.11.11.12, 119.29.29.29]
+    '+.neixin.cn': &internal_dns [11.11.11.11, 11.11.11.12, system, 119.29.29.29]
     '+.sankuai.com': *internal_dns
     '+.meituan.net': *internal_dns
     '+.meituan.com': *internal_dns
