@@ -82,7 +82,7 @@ dns:
     - 223.6.6.6
   # 将会完整覆盖原有 nameserver
   nameserver: #!replace
-    - https://119.29.29.29/dns-query
+    - https://doh.pub/dns-query
     - https://223.6.6.6/dns-query
   #fallback:
     #- tls://120.53.53.53:853
