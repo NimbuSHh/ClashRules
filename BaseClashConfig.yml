@@ -78,11 +78,11 @@ dns:
   
   # 将会完整覆盖原有 default-nameserver
   default-nameserver: #!replace
-    - 120.53.53.53
+    - 119.29.29.29
     - 223.6.6.6
   # 将会完整覆盖原有 nameserver
   nameserver: #!replace
-    - https://120.53.53.53/dns-query
+    - https://119.29.29.29/dns-query
     - https://223.6.6.6/dns-query
   #fallback:
     #- tls://120.53.53.53:853
@@ -97,7 +97,7 @@ dns:
       #- 0.0.0.0/32
       #- 127.0.0.1/32
   nameserver-policy:
-    '+.neixin.cn': &internal_dns [11.11.11.11, 11.11.11.12, 120.53.53.53]
+    '+.neixin.cn': &internal_dns [11.11.11.11, 11.11.11.12, 119.29.29.29]
     '+.sankuai.com': *internal_dns
     '+.meituan.net': *internal_dns
     '+.meituan.com': *internal_dns
