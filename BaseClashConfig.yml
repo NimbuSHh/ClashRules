@@ -114,6 +114,81 @@ dns:
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
   fake-ip-filter:
+    # === 1. 局域网、路由器与 mDNS (核心) ===
+    - "*.lan"
+    - "*.local"
+    - "*.home.arpa"
+    - "*.localhost"
+    - "*.test"
+    - "router.asus.com"
+    - "miwifi.com"
+    - "amplifi.lan"
+    - "*.linksys.com"
+    - "*.linksyssmartwifi.com"
+    - "heartbeat.belkin.com"
+    - "local.adguard.org" # AdGuard Home 必备
+  
+    # === 2. 操作系统网络连通性检测 (防止无网络图标) ===
+    # Windows / Microsoft
+    - "dns.msftncsi.com"
+    - "www.msftncsi.com"
+    - "www.msftconnecttest.com"
+    - "msftconnecttest.com"
+    - "msftncsi.com"
+    # Android / Google
+    - "connectivitycheck.gstatic.com"
+    - "connectivitycheck.android.com"
+    # Apple
+    - "captive.apple.com"
+    - "hotspot.csl.apple.com"
+    - "*.iprofiles.apple.com"
+  
+    # === 3. 游戏与 STUN 服务 (改善 NAT 类型) ===
+    # 通用 STUN
+    - "stun.*"
+    - "*.stun.*"
+    # Xbox
+    - "xbox.*.microsoft.com"
+    - "xnotify.xboxlive.com"
+    - "+.xboxlive.com"
+    # PlayStation
+    - "+.stun.playstation.net"
+    # Nintendo
+    - "+.srv.nintendo.net"
+    - "*.n.n.srv.nintendo.net"
+    # 暴雪 / 战网 / 坦克世界
+    - "+.battlenet.com.cn"
+    - "+.wotgame.cn"
+    - "+.wggames.cn"
+    - "+.wowsgame.cn"
+    - "+.wargaming.net"
+    # 最终幻想 14
+    - "*.finalfantasyxiv.com"
+    - "*.ffxiv.com"
+    - "*.ff14.sdo.com"
+    - "ff.dorado.sdo.com"
+  
+    # === 4. 时间同步 (NTP) ===
+    - "time.*.apple.com"
+    - "time.*.edu.cn"
+    - "pool.ntp.org"
+    - "ntp.*.com"
+    - "+.pool.ntp.org"
+    - "time1.cloud.tencent.com"
+    - "*.ntp.org.cn"
+  
+    # === 5. 特殊应用与 P2P 优化 ===
+    - "*.mcdn.bilivideo.cn"   # B站 P2P CDN，建议直连
+    - "+.media.dssott.com"    # Disney+ 某些检测
+    - "lens.l.google.com"     # Google Lens
+    
+    # === 6. DDNS 与 NAS (按需保留) ===
+    - "+.myqnapcloud.cn"
+    - "+.sn.mynetname.net"    # MikroTik
+    - "+.mycloudnas.com"
+    - "+.synology.me"
+  
+    # === 7. 办公与内网===
     - "+.sankuai.com"
     - "+.sankuai.info"
     - "+.neixin.cn"
@@ -121,121 +196,11 @@ dns:
     - "+.meituan.net"
     - "+.dpfile.com"
     - "+.dianping.com"
-    - "+.51ping.com"
     - "+.dper.com"
-    - "+.135editor.com"
-    - "+.mt"
     - "+.zoom.us"
     - "+.zoom.com.cn"
-    - "*.lan"
-    - "*.localdomain"
-    - "*.example"
-    - "*.invalid"
-    - "*.localhost"
-    - "*.test"
-    - "*.local"
-    - "*.home.arpa"
-    - time.*.com
-    - time.*.gov
-    - time.*.edu.cn
-    - time.*.apple.com
-    - time-ios.apple.com
-    - time1.*.com
-    - time2.*.com
-    - time3.*.com
-    - time4.*.com
-    - time5.*.com
-    - time6.*.com
-    - time7.*.com
-    - ntp.*.com
-    - ntp1.*.com
-    - ntp2.*.com
-    - ntp3.*.com
-    - ntp4.*.com
-    - ntp5.*.com
-    - ntp6.*.com
-    - ntp7.*.com
-    - "*.time.edu.cn"
-    - "*.ntp.org.cn"
-    - "+.pool.ntp.org"
-    - time1.cloud.tencent.com
-    - music.163.com
-    - "*.music.163.com"
-    - "*.126.net"
-    - musicapi.taihe.com
-    - music.taihe.com
-    - songsearch.kugou.com
-    - trackercdn.kugou.com
-    - "*.kuwo.cn"
-    - api-jooxtt.sanook.com
-    - api.joox.com
-    - joox.com
-    - y.qq.com
-    - "*.y.qq.com"
-    - streamoc.music.tc.qq.com
-    - mobileoc.music.tc.qq.com
-    - isure.stream.qqmusic.qq.com
-    - dl.stream.qqmusic.qq.com
-    - aqqmusic.tc.qq.com
-    - amobile.music.tc.qq.com
-    - "*.xiami.com"
-    - "*.music.migu.cn"
-    - music.migu.cn
-    - "+.msftconnecttest.com"
-    - "+.msftncsi.com"
-    - msftconnecttest.com
-    - msftncsi.com
-    - localhost.ptlogin2.qq.com
-    - localhost.sec.qq.com
-    - "+.srv.nintendo.net"
-    - "*.n.n.srv.nintendo.net"
-    - "+.stun.playstation.net"
-    - xbox.*.*.microsoft.com
-    - "*.*.xboxlive.com"
-    - xbox.*.microsoft.com
-    - xnotify.xboxlive.com
-    - "+.battlenet.com.cn"
-    - "+.wotgame.cn"
-    - "+.wggames.cn"
-    - "+.wowsgame.cn"
-    - "+.wargaming.net"
-    - stun.*.*
-    - stun.*.*.*
-    - "+.stun.*.*"
-    - "+.stun.*.*.*"
-    - "+.stun.*.*.*.*"
-    - "+.stun.*.*.*.*.*"
-    - heartbeat.belkin.com
-    - "*.linksys.com"
-    - "*.linksyssmartwifi.com"
-    - "*.router.asus.com"
-    - mesu.apple.com
-    - swscan.apple.com
-    - swquery.apple.com
-    - swdownload.apple.com
-    - swcdn.apple.com
-    - swdist.apple.com
-    - "*.square-enix.com"
-    - "*.finalfantasyxiv.com"
-    - "*.ffxiv.com"
-    - "*.ff14.sdo.com"
-    - ff.dorado.sdo.com
-    - "*.mcdn.bilivideo.cn"
-    - "+.media.dssott.com"
-    - shark007.net
-    - Mijia Cloud
-    - "+.cmbchina.com"
-    - "+.cmbimg.com"
-    - "+.myqnapcloud.cn"
-    - "+.sn.mynetname.net"
-    - "+.mycloudnas.com"
-    - "+.qq.com"
-    - "+.tencent.com"
-    - local.adguard.org
-    - "+.sandai.net"
-    - "+.n0808.com"
-    - "+.market.xiaomi.com"
-
+  
+    
 # 1. clash DNS 请求逻辑：
 #   (1) 当访问一个域名时， nameserver 与 fallback 列表内的所有服务器并发请求，得到域名对应的 IP 地址。
 #   (2) clash 将选取 nameserver 列表内，解析最快的结果。
