@@ -56,7 +56,8 @@ sniffer:
   force-domain:
     - +.v2ex.com
   skip-domain:
-    - Mijia Cloud
+    - "Mijia Cloud"
+    - "+.push.apple.com"
 
 tun:
   enable: true
