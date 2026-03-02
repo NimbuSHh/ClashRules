@@ -63,10 +63,11 @@ tun:
   enable: true
   stack: mixed
   dns-hijack:
-    - 'any:53'
-  auto-redir: true
-  auto-route: true
-  auto-detect-interface: true
+    - "any:53"              # 劫持所有发往 53 端口的 DNS 请求
+    - "tcp://any:53"        # 同时劫持 TCP 的 DNS
+  auto-detect-interface: true   # 自动识别出口网卡（推荐）
+  auto-route: true              # 自动配置系统路由表（TUN 接管全流量的关键）
+  strict-route: true            # 严格路由：防止流量绕过 TUN（会影响某些 VPN 场景）
 
 use-hosts: false
 hosts:
