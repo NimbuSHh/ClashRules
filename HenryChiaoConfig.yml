@@ -1,0 +1,482 @@
+# ══════════════════════════════════════════════════════════════
+# Mihomo 进阶配置模板 · 综合所有进阶特性
+# ══════════════════════════════════════════════════════════════
+
+# ── 全局 ──────────────────────────────────────────────────────
+mixed-port: 7890
+allow-lan: false
+mode: rule
+log-level: warning
+ipv6: false
+find-process-mode: strict
+unified-delay: true
+tcp-concurrent: true
+global-client-fingerprint: chrome
+keep-alive-interval: 30
+keep-alive-idle: 600
+geodata-mode: true
+geodata-loader: memconservative
+geosite-matcher: succinct
+
+external-controller: 127.0.0.1:9090
+# secret: "your_strong_password"
+external-ui: ui
+external-ui-url: "https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip"
+
+profile: { store-selected: true, store-fake-ip: true }
+
+geox-url:
+  geoip:   "https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.dat"
+  geosite: "https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geosite.dat"
+  mmdb:    "https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb"
+
+# ── TUN ───────────────────────────────────────────────────────
+tun:
+  enable: true
+  stack: mixed
+  device: mihomo
+  dns-hijack: ["any:53", "tcp://any:53"]
+  auto-detect-interface: true
+  auto-route: true
+  strict-route: true
+  mtu: 9000
+  route-exclude-address: ["192.168.0.0/16", "10.0.0.0/8", "172.16.0.0/12"]
+
+# ── 嗅探 ──────────────────────────────────────────────────────
+sniffer:
+  enable: true
+  sniff:
+    HTTP:  { ports: [80, 8080-8880], override-destination: true }
+    TLS:   { ports: [443, 8443] }
+    QUIC:  { ports: [443, 8443] }
+  skip-domain:
+    - "Mijia Cloud"
+    - "+.push.apple.com"
+
+# ── DNS ───────────────────────────────────────────────────────
+dns:
+  enable: true
+  listen: 0.0.0.0:1053
+  ipv6: false
+  prefer-h3: true
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  respect-rules: true
+  fake-ip-filter:
+    - "*.lan"
+    - "*.local"
+    - "+.stun.*.*"
+    - "+.stun.*.*.*"
+    - "time.*.com"
+    - "+.xboxlive.com"
+    - "+.nintendo.net"
+    - "+.push.apple.com"
+  proxy-server-nameserver:
+    - https://223.5.5.5/dns-query
+    - https://doh.pub/dns-query
+  nameserver-policy:
+    "geosite:cn,private":
+      - https://223.5.5.5/dns-query
+      - https://doh.pub/dns-query
+    "geosite:geolocation-!cn":
+      - "tls://8.8.8.8"
+      - "tls://1.1.1.1"
+  nameserver:
+    - system
+    - https://223.5.5.5/dns-query
+    - https://doh.pub/dns-query
+
+# ══ 锚点定义区（键名不在 mihomo 文档中，会被忽略，仅作 YAML 引用）══
+
+# 订阅提供者基础参数
+p: &p
+  type: http
+  interval: 86400
+  health-check: { enable: true, url: "https://www.gstatic.com/generate_204", interval: 300, lazy: true }
+  filter: "^(?!.*(剩余|到期|官网|免费|试用|套餐|重置|过期|流量|时间|邮箱|客服|订阅)).*$"
+
+# 规则集基础参数
+rs_classical: &rs_classical { type: http, behavior: classical, interval: 43200, format: text }
+rs_domain:    &rs_domain    { type: http, behavior: domain,    interval: 43200, format: text }
+rs_ipcidr:    &rs_ipcidr    { type: http, behavior: ipcidr,    interval: 43200, format: text }
+
+# 代理组基础参数
+g_select:   &g_select   { type: select,       url: "https://www.gstatic.com/generate_204", include-all: true }
+g_urltest:  &g_urltest  { type: url-test,     url: "https://www.gstatic.com/generate_204", interval: 300, lazy: true, tolerance: 50, timeout: 2000, max-failed-times: 3, include-all: true, hidden: true }
+g_fallback: &g_fallback { type: fallback,     url: "https://www.gstatic.com/generate_204", interval: 300, lazy: true, timeout: 2000, max-failed-times: 3, include-all: true, hidden: true }
+g_balance:  &g_balance  { type: load-balance, url: "https://www.gstatic.com/generate_204", interval: 300, lazy: true, timeout: 2000, strategy: consistent-hashing, max-failed-times: 3, include-all: true, hidden: true }
+
+# 节点过滤正则
+FilterHK: &FilterHK '^(?=.*(🇭🇰|港|HK|Hong Kong))(?!.*(回国|校园|剩余|到期|官网|客服|订阅|节点|过期)).*$'
+FilterTW: &FilterTW '^(?=.*(🇹🇼|台|TW|Taiwan))(?!.*(回国|校园|剩余|到期|官网|客服|订阅|节点|过期)).*$'
+FilterJP: &FilterJP '^(?=.*(🇯🇵|日|JP|Japan|Tokyo|Osaka))(?!.*(回国|校园|剩余|到期|官网|客服|订阅|节点|过期)).*$'
+FilterSG: &FilterSG '^(?=.*(🇸🇬|新|SG|Singapore))(?!.*(回国|校园|剩余|到期|官网|客服|订阅|节点|过期)).*$'
+FilterUS: &FilterUS '^(?=.*(🇺🇸|美|US|United States))(?!.*(回国|校园|剩余|到期|官网|客服|订阅|节点|过期)).*$'
+FilterKR: &FilterKR '^(?=.*(🇰🇷|韩|KR|Korea))(?!.*(回国|校园|剩余|到期|官网|客服|订阅|节点|过期)).*$'
+
+# ── 代理提供者 ────────────────────────────────────────────────
+proxy-providers:
+  机场订阅:
+    <<: *p
+    url: "https://your-airport.com/subscribe?token=xxx"
+    path: ./proxy_providers/airport.yaml
+
+# ── 代理组 ────────────────────────────────────────────────────
+proxy-groups:
+  - name: "🎯 节点选择"
+    type: select
+    proxies: ["🌐 智能选择", "✋ 手动选择", DIRECT]
+    include-all: true
+
+  - name: "🌐 智能选择"
+    type: select
+    proxies: ["🇭🇰 香港", "🇸🇬 新加坡", "🇯🇵 日本", "🇺🇸 美国", "🇰🇷 韩国", "🇹🇼 台湾"]
+
+  - { name: "✋ 手动选择",  <<: *g_select }
+
+  - name: "🤖 AI 服务"
+    type: select
+    proxies: ["🇺🇸 美国", "🇸🇬 新加坡", "🎯 节点选择"]
+
+  - name: "📹 流媒体"
+    type: select
+    proxies: ["🇭🇰 香港", "🇸🇬 新加坡", "🇯🇵 日本", "🇺🇸 美国", "🎯 节点选择"]
+
+  - name: "✈️ 电报消息"
+    type: select
+    proxies: ["🎯 节点选择", "🇸🇬 新加坡", "🇭🇰 香港"]
+
+  - name: "🍎 苹果服务"
+    type: select
+    proxies: [DIRECT, "🎯 节点选择", "🇭🇰 香港"]
+
+  - name: "Ⓜ️ 微软服务"
+    type: select
+    proxies: [DIRECT, "🎯 节点选择", "🇺🇸 美国"]
+
+  - name: "🛡️ 广告拦截"
+    type: select
+    proxies: [REJECT, DIRECT]
+
+  - name: "🐟 漏网之鱼"
+    type: select
+    proxies: ["🎯 节点选择", DIRECT]
+
+  # 地区三合一
+  - name: "🇭🇰 香港"
+    type: select
+    proxies: ["🇭🇰 香港-自动", "🇭🇰 香港-回退", "🇭🇰 香港-均衡"]
+  - name: "🇸🇬 新加坡"
+    type: select
+    proxies: ["🇸🇬 新加坡-自动", "🇸🇬 新加坡-回退", "🇸🇬 新加坡-均衡"]
+  - name: "🇯🇵 日本"
+    type: select
+    proxies: ["🇯🇵 日本-自动", "🇯🇵 日本-回退", "🇯🇵 日本-均衡"]
+  - name: "🇺🇸 美国"
+    type: select
+    proxies: ["🇺🇸 美国-自动", "🇺🇸 美国-回退", "🇺🇸 美国-均衡"]
+  - name: "🇰🇷 韩国"
+    type: select
+    proxies: ["🇰🇷 韩国-自动", "🇰🇷 韩国-回退", "🇰🇷 韩国-均衡"]
+  - name: "🇹🇼 台湾"
+    type: select
+    proxies: ["🇹🇼 台湾-自动", "🇹🇼 台湾-回退", "🇹🇼 台湾-均衡"]
+
+  - { name: "🇭🇰 香港-自动",   <<: *g_urltest,  filter: *FilterHK }
+  - { name: "🇸🇬 新加坡-自动", <<: *g_urltest,  filter: *FilterSG }
+  - { name: "🇯🇵 日本-自动",   <<: *g_urltest,  filter: *FilterJP }
+  - { name: "🇺🇸 美国-自动",   <<: *g_urltest,  filter: *FilterUS }
+  - { name: "🇰🇷 韩国-自动",   <<: *g_urltest,  filter: *FilterKR }
+  - { name: "🇹🇼 台湾-自动",   <<: *g_urltest,  filter: *FilterTW }
+
+  - { name: "🇭🇰 香港-回退",   <<: *g_fallback, filter: *FilterHK }
+  - { name: "🇸🇬 新加坡-回退", <<: *g_fallback, filter: *FilterSG }
+  - { name: "🇯🇵 日本-回退",   <<: *g_fallback, filter: *FilterJP }
+  - { name: "🇺🇸 美国-回退",   <<: *g_fallback, filter: *FilterUS }
+  - { name: "🇰🇷 韩国-回退",   <<: *g_fallback, filter: *FilterKR }
+  - { name: "🇹🇼 台湾-回退",   <<: *g_fallback, filter: *FilterTW }
+
+  - { name: "🇭🇰 香港-均衡",   <<: *g_balance,  filter: *FilterHK }
+  - { name: "🇸🇬 新加坡-均衡", <<: *g_balance,  filter: *FilterSG }
+  - { name: "🇯🇵 日本-均衡",   <<: *g_balance,  filter: *FilterJP }
+  - { name: "🇺🇸 美国-均衡",   <<: *g_balance,  filter: *FilterUS }
+  - { name: "🇰🇷 韩国-均衡",   <<: *g_balance,  filter: *FilterKR }
+  - { name: "🇹🇼 台湾-均衡",   <<: *g_balance,  filter: *FilterTW }
+
+# ── 规则集 ────────────────────────────────────────────────────
+rule-providers:
+  reject_non_ip:      { <<: *rs_classical, url: "https://ruleset.skk.moe/Clash/non_ip/reject.txt",          path: ./rule_set/reject_non_ip.txt }
+  reject_non_ip_drop: { <<: *rs_classical, url: "https://ruleset.skk.moe/Clash/non_ip/reject-drop.txt",     path: ./rule_set/reject_non_ip_drop.txt }
+  reject_domainset:   { <<: *rs_domain,    url: "https://ruleset.skk.moe/Clash/domainset/reject.txt",       path: ./rule_set/reject_domainset.txt }
+  ai_non_ip:          { <<: *rs_classical, url: "https://ruleset.skk.moe/Clash/non_ip/ai.txt",              path: ./rule_set/ai_non_ip.txt }
+  telegram_non_ip:    { <<: *rs_classical, url: "https://ruleset.skk.moe/Clash/non_ip/telegram.txt",        path: ./rule_set/telegram_non_ip.txt }
+  stream_non_ip:      { <<: *rs_classical, url: "https://ruleset.skk.moe/Clash/non_ip/stream.txt",          path: ./rule_set/stream_non_ip.txt }
+  apple_cdn:          { <<: *rs_domain,    url: "https://ruleset.skk.moe/Clash/domainset/apple_cdn.txt",    path: ./rule_set/apple_cdn.txt }
+  apple_services:     { <<: *rs_classical, url: "https://ruleset.skk.moe/Clash/non_ip/apple_services.txt", path: ./rule_set/apple_services.txt }
+  apple_cn_non_ip:    { <<: *rs_classical, url: "https://ruleset.skk.moe/Clash/non_ip/apple_cn.txt",       path: ./rule_set/apple_cn_non_ip.txt }
+  microsoft_cdn_non_ip: { <<: *rs_classical, url: "https://ruleset.skk.moe/Clash/non_ip/microsoft_cdn.txt", path: ./rule_set/microsoft_cdn_non_ip.txt }
+  microsoft_non_ip:   { <<: *rs_classical, url: "https://ruleset.skk.moe/Clash/non_ip/microsoft.txt",      path: ./rule_set/microsoft_non_ip.txt }
+  global_non_ip:      { <<: *rs_classical, url: "https://ruleset.skk.moe/Clash/non_ip/global.txt",         path: ./rule_set/global_non_ip.txt }
+  domestic_non_ip:    { <<: *rs_classical, url: "https://ruleset.skk.moe/Clash/non_ip/domestic.txt",       path: ./rule_set/domestic_non_ip.txt }
+  direct_non_ip:      { <<: *rs_classical, url: "https://ruleset.skk.moe/Clash/non_ip/direct.txt",         path: ./rule_set/direct_non_ip.txt }
+  lan_non_ip:         { <<: *rs_classical, url: "https://ruleset.skk.moe/Clash/non_ip/lan.txt",            path: ./rule_set/lan_non_ip.txt }
+  reject_ip:          { <<: *rs_classical, url: "https://ruleset.skk.moe/Clash/ip/reject.txt",             path: ./rule_set/reject_ip.txt }
+  telegram_ip:        { <<: *rs_classical, url: "https://ruleset.skk.moe/Clash/ip/telegram.txt",           path: ./rule_set/telegram_ip.txt }
+  stream_ip:          { <<: *rs_classical, url: "https://ruleset.skk.moe/Clash/ip/stream.txt",             path: ./rule_set/stream_ip.txt }
+  domestic_ip:        { <<: *rs_classical, url: "https://ruleset.skk.moe/Clash/ip/domestic.txt",           path: ./rule_set/domestic_ip.txt }
+  lan_ip:             { <<: *rs_classical, url: "https://ruleset.skk.moe/Clash/ip/lan.txt",                path: ./rule_set/lan_ip.txt }
+  china_ip:           { <<: *rs_ipcidr,    url: "https://ruleset.skk.moe/Clash/ip/china_ip.txt",           path: ./rule_set/china_ip.txt }
+
+# ── 路由规则 ──────────────────────────────────────────────────
+rules:
+  # 非 IP 类（不触发 DNS 解析）
+  - RULE-SET,reject_non_ip,🛡️ 广告拦截
+  - RULE-SET,reject_domainset,🛡️ 广告拦截
+  - RULE-SET,reject_non_ip_drop,REJECT-DROP
+  - RULE-SET,ai_non_ip,🤖 AI 服务
+  - RULE-SET,telegram_non_ip,✈️ 电报消息
+  - RULE-SET,stream_non_ip,📹 流媒体
+  - RULE-SET,apple_cdn,DIRECT
+  - RULE-SET,apple_cn_non_ip,DIRECT
+  - RULE-SET,apple_services,🍎 苹果服务
+  - RULE-SET,microsoft_cdn_non_ip,DIRECT
+  - RULE-SET,microsoft_non_ip,Ⓜ️ 微软服务
+  - RULE-SET,global_non_ip,🎯 节点选择
+  - RULE-SET,domestic_non_ip,DIRECT
+  - RULE-SET,direct_non_ip,DIRECT
+  - RULE-SET,lan_non_ip,DIRECT
+  # IP 类（会触发 DNS 解析，放在最后）
+  - RULE-SET,reject_ip,🛡️ 广告拦截
+  - RULE-SET,telegram_ip,✈️ 电报消息
+  - RULE-SET,stream_ip,📹 流媒体
+  - RULE-SET,lan_ip,DIRECT
+  - RULE-SET,domestic_ip,DIRECT
+  - RULE-SET,china_ip,DIRECT
+  - MATCH,🐟 漏网之鱼
+
+
+
+
+
+# 混合端口 HTTP和SOCKS5用一个端口
+mixed-port: 7890
+
+# HTTP 代理端口
+port: 7893
+
+# SOCKS5 代理端口
+socks-port: 7891
+
+# Linux 和 macOS 的 redir 代理端口 (如需使用此功能，请取消注释)
+redir-port: 7892
+
+#自定义 geodata url
+#geox-url:
+#  geoip: "https://cdn.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/geoip.dat"
+#  geosite: "https://cdn.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/geosite.dat"
+#  mmdb: "https://cdn.jsdelivr.net/gh/Loyalsoldier/geoip@release/Country.mmdb"
+geodata-mode: true
+geo-auto-update: true
+geo-update-interval: 24
+#geox-url:
+#  geoip: "https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.dat"
+#  geosite: "https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geosite.dat"
+#  mmdb: "https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.metadb"
+#  asn: "https://github.com/xishang0128/geoip/releases/download/latest/GeoLite2-ASN.mmdb"
+
+tcp-concurrent: true
+
+allow-lan: false
+mode: rule
+log-level: info
+ipv6: false
+
+external-controller: 0.0.0.0:9090
+secret: '123456'
+
+profile: 
+# 存储 select 选择记录
+  store-selected: true
+  # 持久化 fake-ip
+  store-fake-ip: true
+  
+sniffer:
+  enable: true
+  force-dns-mapping: true
+  parse-pure-ip: true
+  override-destination: false
+  sniff:
+    HTTP:
+      ports: [80, 8080-8880]
+      override-destination: true
+    TLS:
+      ports: [443, 8443]
+    QUIC:
+      ports: [443, 8443]
+  force-domain:
+    - +.v2ex.com
+  skip-domain:
+    - "Mijia Cloud"
+    - "+.push.apple.com"
+
+tun:
+  enable: true
+  stack: mixed
+  dns-hijack:
+    - "any:53"              # 劫持所有发往 53 端口的 DNS 请求
+    - "tcp://any:53"        # 同时劫持 TCP 的 DNS
+  auto-detect-interface: true   # 自动识别出口网卡（推荐）
+  auto-route: true              # 自动配置系统路由表（TUN 接管全流量的关键）
+  strict-route: true            # 严格路由：防止流量绕过 TUN（会影响某些 VPN 场景）
+
+use-hosts: false
+hosts:
+
+dns:
+  enable: true
+  prefer-h3: true
+  listen: 0.0.0.0:53
+  ipv6: false
+  
+  # 将会完整覆盖原有 default-nameserver
+  default-nameserver: #!replace
+    - 119.29.29.29
+    - 223.6.6.6
+  # 将会完整覆盖原有 nameserver
+  nameserver: #!replace
+    - https://doh.pub/dns-query
+    - https://223.6.6.6/dns-query
+  #fallback:
+    #- tls://120.53.53.53:853
+    #- tls://223.6.6.6:853
+    # - tls://1.0.0.1:853
+    # - tls://8.8.4.4:853
+  #fallback-filter: #!replace
+    #geoip: false
+    #geoip-code: CN
+    #ipcidr:
+      #- 240.0.0.0/4
+      #- 0.0.0.0/32
+      #- 127.0.0.1/32
+  nameserver-policy:
+    '+.neixin.cn': &internal_dns [dhcp://en0, system, 11.11.11.11, 11.11.11.12, 119.29.29.29, 223.6.6.6]
+    '+.sankuai.com': *internal_dns
+    '+.meituan.net': *internal_dns
+    '+.meituan.com': *internal_dns
+    '+.dpfile.com': *internal_dns
+    '+.dianping.com': *internal_dns
+    '+.51ping.com': *internal_dns
+    '+.135editor.com': *internal_dns
+    '+.dper.com': *internal_dns
+    '+.nowcoder.com': *internal_dns
+    '+.sankuai.info': *internal_dns
+    '+.mt': *internal_dns
+    '+.keetapp.com': *internal_dns
+    '+.mynocode.host': *internal_dns  
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  fake-ip-filter:
+    # === 1. 局域网、路由器与 mDNS (核心) ===
+    - "*.lan"
+    - "*.local"
+    - "*.home.arpa"
+    - "*.localhost"
+    - "*.test"
+    - "router.asus.com"
+    - "miwifi.com"
+    - "amplifi.lan"
+    - "*.linksys.com"
+    - "*.linksyssmartwifi.com"
+    - "heartbeat.belkin.com"
+    - "local.adguard.org" # AdGuard Home 必备
+  
+    # === 2. 操作系统网络连通性检测 (防止无网络图标) ===
+    # Windows / Microsoft
+    - "dns.msftncsi.com"
+    - "www.msftncsi.com"
+    - "www.msftconnecttest.com"
+    - "msftconnecttest.com"
+    - "msftncsi.com"
+    # Android / Google
+    - "connectivitycheck.gstatic.com"
+    - "connectivitycheck.android.com"
+    # Apple
+    - "captive.apple.com"
+    - "hotspot.csl.apple.com"
+    - "*.iprofiles.apple.com"
+  
+    # === 3. 游戏与 STUN 服务 (改善 NAT 类型) ===
+    # 通用 STUN
+    - "stun.*"
+    - "*.stun.*"
+    # Xbox
+    - "xbox.*.microsoft.com"
+    - "xnotify.xboxlive.com"
+    - "+.xboxlive.com"
+    # PlayStation
+    - "+.stun.playstation.net"
+    # Nintendo
+    - "+.srv.nintendo.net"
+    - "*.n.n.srv.nintendo.net"
+    # 暴雪 / 战网 / 坦克世界
+    - "+.battlenet.com.cn"
+    - "+.wotgame.cn"
+    - "+.wggames.cn"
+    - "+.wowsgame.cn"
+    - "+.wargaming.net"
+    # 最终幻想 14
+    - "*.finalfantasyxiv.com"
+    - "*.ffxiv.com"
+    - "*.ff14.sdo.com"
+    - "ff.dorado.sdo.com"
+  
+    # === 4. 时间同步 (NTP) ===
+    - "time.*.apple.com"
+    - "time.*.edu.cn"
+    - "pool.ntp.org"
+    - "ntp.*.com"
+    - "+.pool.ntp.org"
+    - "time1.cloud.tencent.com"
+    - "*.ntp.org.cn"
+  
+    # === 5. 特殊应用与 P2P 优化 ===
+    - "*.mcdn.bilivideo.cn"   # B站 P2P CDN，建议直连
+    - "+.media.dssott.com"    # Disney+ 某些检测
+    - "lens.l.google.com"     # Google Lens
+    
+    # === 6. DDNS 与 NAS (按需保留) ===
+    - "+.myqnapcloud.cn"
+    - "+.sn.mynetname.net"    # MikroTik
+    - "+.mycloudnas.com"
+    - "+.synology.me"
+  
+    # === 7. 办公与内网===
+    - "+.sankuai.com"
+    - "+.sankuai.info"
+    - "+.neixin.cn"
+    - "+.meituan.com"
+    - "+.meituan.net"
+    - "+.dpfile.com"
+    - "+.dianping.com"
+    - "+.dper.com"
+    - "+.zoom.us"
+    - "+.zoom.com.cn"
+  
+    
+# 1. clash DNS 请求逻辑：
+#   (1) 当访问一个域名时， nameserver 与 fallback 列表内的所有服务器并发请求，得到域名对应的 IP 地址。
+#   (2) clash 将选取 nameserver 列表内，解析最快的结果。
+#   (3) 若解析结果中，IP 地址属于 国外，那么 clash 将选择 fallback 列表内，解析最快的结果。
+#
+#   因此，我在 nameserver 和 fallback 内都放置了无污染、解析速度较快的国内 DNS 服务器，以达到最快的解析速度。
+#   但是 fallback 列表内服务器会用在解析境外网站，为了结果绝对无污染，我仅保留了支持 DoT/DoH 的两个服务器。
+#
+# 2. clash DNS 配置注意事项：
+#   (1) 如果您为了确保 DNS 解析结果无污染，请仅保留列表内以 tls:// 或 https:// 开头的 DNS 服务器，但是通常对于国内域名没有必要。
+#   (2) 如果您不在乎可能解析到污染的结果，更加追求速度。请将 nameserver 列表的服务器插入至 fallback 列表内，并移除重复项。
+#
+# 3. 关于 DNS over HTTPS (DoH) 和 DNS over TLS (DoT) 的选择：
+#   对于两项技术双方各执一词，而且会无休止的争论，各有利弊。各位请根据具体需求自行选择，但是配置文件内默认启用 DoT，因为目前国内没有封锁或管制。
+#   DoH: 以 https:// 开头的 DNS 服务器。拥有更好的伪装性，且几乎不可能被运营商或网络管理封锁，但查询效率和安全性可能略低。
+#   DoT: 以 tls:// 开头的 DNS 服务器。拥有更高的安全性和查询效率，但端口有可能被管制或封锁。
+#   若要了解更多关于 DoH/DoT 相关技术，请自行查阅规范文档。
