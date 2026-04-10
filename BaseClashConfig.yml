@@ -61,7 +61,7 @@ sniffer:
 
 tun:
   enable: true
-  stack: mixed
+  stack: gvisor
   dns-hijack:
     - "any:53"              # 劫持所有发往 53 端口的 DNS 请求
     - "tcp://any:53"        # 同时劫持 TCP 的 DNS
