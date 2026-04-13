@@ -98,21 +98,6 @@ dns:
       #- 240.0.0.0/4
       #- 0.0.0.0/32
       #- 127.0.0.1/32
-  nameserver-policy:
-    '+.neixin.cn': &internal_dns [dhcp://en0, system, 11.11.11.11, 11.11.11.12, 119.29.29.29, 223.6.6.6]
-    '+.sankuai.com': *internal_dns
-    '+.meituan.net': *internal_dns
-    '+.meituan.com': *internal_dns
-    '+.dpfile.com': *internal_dns
-    '+.dianping.com': *internal_dns
-    '+.51ping.com': *internal_dns
-    '+.135editor.com': *internal_dns
-    '+.dper.com': *internal_dns
-    '+.nowcoder.com': *internal_dns
-    '+.sankuai.info': *internal_dns
-    '+.mt': *internal_dns
-    '+.keetapp.com': *internal_dns
-    '+.mynocode.host': *internal_dns  
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
   fake-ip-filter:
