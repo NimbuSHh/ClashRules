@@ -175,17 +175,7 @@ dns:
     - "+.mycloudnas.com"
     - "+.synology.me"
   
-    # === 7. 办公与内网===
-    - "+.sankuai.com"
-    - "+.sankuai.info"
-    - "+.neixin.cn"
-    - "+.meituan.com"
-    - "+.meituan.net"
-    - "+.dpfile.com"
-    - "+.dianping.com"
-    - "+.dper.com"
-    - "+.zoom.us"
-    - "+.zoom.com.cn"
+    
   
     
 # 1. clash DNS 请求逻辑：
