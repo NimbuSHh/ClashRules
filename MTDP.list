@@ -7,38 +7,11 @@ DOMAIN-SUFFIX,meituan.com
 DOMAIN-SUFFIX,dpfile.com
 DOMAIN-SUFFIX,dianping.com
 DOMAIN-SUFFIX,51ping.com
-DOMAIN-SUFFIX,135editor.com
 DOMAIN-SUFFIX,dper.com
-DOMAIN-SUFFIX,zoom.us
-DOMAIN-SUFFIX,zoom.com.cn
-DOMAIN-SUFFIX,kaspersky-labs.com
-DOMAIN-SUFFIX,kaspersky.com
-DOMAIN-SUFFIX,nowcoder.com
 DOMAIN-SUFFIX,sankuai.info
 DOMAIN-SUFFIX,mt
 DOMAIN-SUFFIX,keetapp.com
 DOMAIN-SUFFIX,mynocode.host
-DOMAIN-SUFFIX,mysmartadvisor.com
-IP-CIDR,11.0.0.0/8,no-resolve
-IP-CIDR,10.0.0.0/8,no-resolve
-IP-CIDR,33.0.0.0/8,no-resolve
 
-IP-CIDR,202.90.96.0/20,no-resolve
-
-IP-CIDR,203.76.217.49/24,no-resolve
-IP-CIDR,103.37.152.224/24,no-resolve
-
-IP-CIDR,103.202.56.0/21,no-resolve
-IP-CIDR,103.202.64.0/21,no-resolve
-IP-CIDR,103.202.72.0/21,no-resolve
-IP-CIDR,103.202.80.0/21,no-resolve
-IP-CIDR,103.202.88.0/21,no-resolve
-IP-CIDR,103.202.96.0/21,no-resolve
-IP-CIDR,103.202.104.0/21,no-resolve
-IP-CIDR,103.202.112.0/21,no-resolve
-IP-CIDR,103.202.120.0/21,no-resolve
-IP-CIDR,103.202.128.0/21,no-resolve
-IP-CIDR,103.202.136.0/21,no-resolve
-IP-CIDR,103.202.144.0/22,no-resolve
 
 
