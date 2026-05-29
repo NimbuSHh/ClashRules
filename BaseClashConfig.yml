@@ -99,7 +99,7 @@ dns:
       #- 0.0.0.0/32
       #- 127.0.0.1/32
   enhanced-mode: fake-ip
-  fake-ip-range: 198.18.0.1/16
+  fake-ip-range: 198.198.0.1/16
   fake-ip-filter:
     # === 1. 局域网、路由器与 mDNS (核心) ===
     - "*.lan"
