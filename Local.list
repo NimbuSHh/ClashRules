@@ -3,6 +3,7 @@
 DOMAIN-SUFFIX,mycloudnas.com
 DOMAIN-SUFFIX,mycloudnas.com
 DOMAIN-SUFFIX,sn.mynetname.net
+DOMAIN-SUFFIX,felis-tet.ts.net
 
 IP-CIDR,10.1.2.0/24,no-resolve
 IP-CIDR,10.1.0.0/24,no-resolve
