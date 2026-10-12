@@ -86,7 +86,10 @@ dns:
   # 将会完整覆盖原有 nameserver
   nameserver: #!replace
     - https://doh.pub/dns-query
-    - https://223.6.6.6/dns-query
+    - https://dns.alidns.com/dns-query
+  #proxy-server-nameserver:
+    #- https://doh.pub/dns-query
+    #- https://dns.alidns.com/dns-query
   #fallback:
     #- tls://120.53.53.53:853
     #- tls://223.6.6.6:853
